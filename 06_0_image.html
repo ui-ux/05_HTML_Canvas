@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>image</title>
+    <link rel="stylesheet" href="./00_base_template/styles.css" />
+    <script>
+      window.onload = function () {
+        // getting the element and its graphic context
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        var img = new Image();
+        img.onload = function () {
+          context.drawImage(img, 10, 10, 150, 150);
+        };
+        img.src = "./00_images/gnome.jpg";
+
+        // void ctx.drawImage(image, dx, dy);
+        // void ctx.drawImage(image, dx, dy, dWidth, dHeight);
+        // void ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+      };
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="300"></canvas>
+  </body>
+</html>

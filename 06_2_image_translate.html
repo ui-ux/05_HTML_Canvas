@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>image translate</title>
+    <link rel="stylesheet" href="./00_base_template/styles.css" />
+    <script>
+      window.onload = function () {
+        // getting the element and its graphic context
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+
+        var img = new Image();
+        img.onload = function () {
+          // translate
+          context.save();
+          context.translate(40, 10);
+          context.drawImage(img, 0, 0, 50, 50);
+          context.restore();
+
+          // rotate
+          context.save();
+          context.rotate((10 * Math.PI) / 180);
+          context.drawImage(img, 0, 70, 50, 50);
+          context.restore();
+
+          // scale
+          context.save();
+          context.scale(0.8, 0.8);
+          context.drawImage(img, 0, 170, 50, 50);
+          context.restore();
+        };
+
+        img.src = "./00_images/gnome.jpg";
+      };
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="300"></canvas>
+  </body>
+</html>

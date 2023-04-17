@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>creation_of_game_objects</title>
+    <link rel="stylesheet" href="./00_base_template/styles.css" />
+    <script>
+      window.onload = function () {
+        // getting the element and its graphic context
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        var context2 = canvas.getContext("2d");
+
+        // object Entity
+        var Entity = {
+          pos_x: 1,
+          pos_y: 1,
+          size_x: 1,
+          size_y: 1,
+        };
+
+        // create new object Player - inherit object Entity
+        var Player = Object.create(Entity);
+
+        // Adding a new property to the Player object
+        Player.lifetime = 100;
+        console.log(Entity);
+        console.log(Player);
+        console.log(Player.lifetime);
+        console.log(Player.size_y);
+      };
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="300"></canvas>
+  </body>
+</html>

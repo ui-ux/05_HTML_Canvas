@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>text</title>
+    <link rel="stylesheet" href="./00_base_template/styles.css" />
+    <script>
+      window.onload = function () {
+        // Отримання canvas елементу та контексту малювання
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        // Функція для завантаження JSON-файлу
+        function loadJSON(url, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              callback(JSON.parse(xhr.responseText));
+            }
+          };
+          xhr.open("GET", url, true);
+          xhr.send();
+        }
+
+        // Функція для малювання картинки на canvas
+        function drawImageOnCanvas(json) {
+          var tileset = json.tilesets[0];
+          var img = new Image();
+          img.src = tileset.image;
+          img.onload = function () {
+            var layer = json.layers[0];
+            for (var i = 0; i < layer.data.length; i++) {
+              var tile = layer.data[i] - tileset.firstgid;
+              var sx = (tile % tileset.columns) * tileset.tilewidth;
+              var sy = Math.floor(tile / tileset.columns) * tileset.tileheight;
+              var dx = (i % layer.width) * tileset.tilewidth;
+              var dy = Math.floor(i / layer.width) * tileset.tileheight;
+              ctx.drawImage(
+                img,
+                sx,
+                sy,
+                tileset.tilewidth,
+                tileset.tileheight,
+                dx,
+                dy,
+                tileset.tilewidth,
+                tileset.tileheight
+              );
+            }
+          };
+        }
+
+        // Обробник події для кнопки
+        var button = document.getElementById("load-json-button");
+        button.onclick = function () {
+          loadJSON("./00_json/gnome2.json", drawImageOnCanvas);
+        };
+
+        // Завантаження початкового JSON-файлу
+        loadJSON("./00_json/gnome.json", drawImageOnCanvas);
+      };
+    </script>
+  </head>
+  <body>
+    <button type="button" id="load-json-button">Завантажити новий JSON</button>
+    <canvas id="myCanvas"></canvas>
+  </body>
+</html>

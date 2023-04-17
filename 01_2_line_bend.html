@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Line</title>
+    <link rel="stylesheet" href="./00_base_template/styles.css" />
+    <script>
+      window.onload = function () {
+        // getting the element and its graphic context
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        var context2 = canvas.getContext("2d");
+        var x = [40, 70, 100, 130, 160, 190];
+        var y = [40, 80, 40, 80, 40, 80];
+
+        // create path
+        context.beginPath();
+
+        // line bend
+        context.lineWidth = 4;
+        context.strokeStyle = "blue";
+        context.moveTo(0, 20);
+
+        for (var i = 0; i < x.length; i++) {
+          context.lineTo(x[i], y[i]);
+        }
+
+        // draw a line on the canvas
+        context.stroke();
+      };
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="300"></canvas>
+  </body>
+</html>

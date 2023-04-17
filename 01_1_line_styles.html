@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Line styles</title>
+    <link rel="stylesheet" href="./00_base_template/styles.css" />
+    <script>
+      window.onload = function () {
+        // getting the element and its graphic context
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        var context2 = canvas.getContext("2d");
+
+        // create path
+        context.beginPath();
+
+        // line 1
+        context.moveTo(50, 60);
+        context.lineTo(100, 100);
+
+        // line styles
+        context.lineWidth = 8;
+        context.strokeStyle = "green";
+
+        // line 2 - lineJoin = "miter"; => Default
+        context.moveTo(100, 60);
+        context.lineTo(150, 40);
+        context.lineTo(200, 150);
+        // draw a line on the canvas
+        context.stroke();
+
+        // line 3 - lineJoin = "round";
+        context.moveTo(200, 60);
+        context.lineTo(250, 40);
+        context.lineTo(300, 150);
+        context.lineJoin = "round";
+        // draw a line on the canvas
+        context.stroke();
+
+        // line 3 - lineJoin = "bevel";
+        context.moveTo(300, 60);
+        context.lineTo(350, 40);
+        context.lineTo(400, 150);
+        context.lineJoin = "bevel";
+        // draw a line on the canvas
+        context.stroke();
+      };
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="300"></canvas>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Line</title>
+    <link rel="stylesheet" href="./00_base_template/styles.css" />
+    <script>
+      window.onload = function () {
+        // getting the element and its graphic context
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+
+        // create path
+        context.beginPath();
+        context.lineWidth = 5;
+
+        function square(side, x, color) {
+          context.strokeStyle = color;
+          context.strokeRect(x, 50, side, side);
+          context.stroke();
+        }
+        square(15, 10, "red");
+        square(25, 50, "red");
+        square(35, 110, "red");
+        square(45, 180, "red");
+      };
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="300"></canvas>
+  </body>
+</html>

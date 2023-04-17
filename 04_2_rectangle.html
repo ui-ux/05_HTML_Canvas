@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rectangle</title>
+    <link rel="stylesheet" href="./00_base_template/styles.css" />
+    <script>
+      window.onload = function () {
+        // getting the element and its graphic context
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+
+        // canvas.width = 600;
+        // canvas.height = 300;
+        context.strokeStyle = "red";
+        context.fillStyle = "blue";
+        context.shadowBlur = 25;
+        context.shadowColor = "green";
+        context.rect(0, 0, 100, 280);
+        context.fill();
+
+        // draw a line on the canvas
+        context.stroke();
+
+        // restore context to previous state
+        context.restore();
+      };
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="300"></canvas>
+  </body>
+</html>
