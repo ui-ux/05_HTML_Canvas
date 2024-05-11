@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>creation_of_game_objects</title>
+    <link rel="stylesheet" href="./00_base_template/styles.css" />
+    <script>
+      window.onload = function () {
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var atlasPath = "./00_json/atlas.json";
+        var atlasData = null;
+        var jsonLoaded = false;
+
+        function loadJSON(path, callback) {
+          var xhr = new XMLHttpRequest();
+          xhr.overrideMimeType("application/json");
+          xhr.open("GET", path, true);
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              callback(xhr.responseText);
+            }
+          };
+          xhr.send(null);
+        }
+
+        function drawSprite(spriteName, x, y) {
+          if (!jsonLoaded) {
+            console.error("Atlas is not loaded yet");
+            return;
+          }
+
+          var spriteData = atlasData.frames[spriteName];
+          if (!spriteData) {
+            console.error("Sprite not found in atlas");
+            return;
+          }
+
+          var img = new Image();
+          img.onload = function () {
+            var frame = spriteData.frame;
+            var srcSize = spriteData.sourceSize;
+
+            ctx.drawImage(
+              img,
+              frame.x,
+              frame.y,
+              frame.w,
+              frame.h,
+              x - srcSize.w / 1,
+              y - srcSize.h / 2,
+              frame.w,
+              frame.h
+            );
+          };
+          img.src = "./00_images/button.jpg";
+        }
+
+        loadJSON(atlasPath, function (response) {
+          atlasData = JSON.parse(response);
+          jsonLoaded = true;
+
+          // Пример вызова функции отображения спрайта
+          drawSprite("rocket_down", 100, 100);
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="300"></canvas>
+  </body>
+</html>

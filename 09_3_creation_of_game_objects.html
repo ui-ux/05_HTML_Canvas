@@ -13,29 +13,33 @@
         var context = canvas.getContext("2d");
         var context2 = canvas.getContext("2d");
 
-        // object Entity
-        var Entity = {
-          pos_x: 1,
-          pos_y: 1,
-          size_x: 1,
-          size_y: 1,
+        const Entity = {
+          health: 100,
+          damage: 10,
           attack() {
             console.log("Entity");
           },
         };
 
-        // create new object Player - inherit object Entity
-        var Player = Object.create(Entity);
+        const extend = (object, extendProto) => {
+          const extendedObject = { ...object };
 
-        // Adding a new property to the Player object
-        Player.lifetime = 100;
-        console.log(Entity);
-        console.log(Player);
-        console.log(Player.lifetime);
-        console.log(Player.size_y);
-        Player.attack = function () {
-          console.log("Player");
+          for (const property in extendProto) {
+            if (typeof extendedObject[property] === "undefined") {
+              extendedObject[property] = extendProto[property];
+            }
+          }
+
+          return extendedObject;
         };
+
+        const Player = extend(Entity, {
+          lifetime: 100,
+          attack() {
+            console.log("Player");
+          },
+        });
+
         Player.attack();
       };
     </script>

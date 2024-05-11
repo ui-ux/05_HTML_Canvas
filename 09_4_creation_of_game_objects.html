@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>creation_of_game_objects</title>
+    <link rel="stylesheet" href="./00_base_template/styles.css" />
+    <script>
+      window.onload = function () {
+        // getting the element and its graphic context
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        var context2 = canvas.getContext("2d");
+
+        // Constructor Tank
+        function Tank(x, y, speed, health) {
+          this.x = x;
+          this.y = y;
+          this.speed = speed;
+          this.health = health;
+          this.width = 50;
+          this.height = 50;
+          this.color = "green";
+          this.draw = function (ctx) {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+          };
+          this.fire = function () {
+            // код для вистрілу з танка
+          };
+        }
+
+        // Creating an object instance Tank
+        var myTank = new Tank(50, 50, 5, 100);
+        console.log(myTank);
+
+        // Constructor Rocket
+        function Rocket(x, y, speed, damage) {
+          this.x = x;
+          this.y = y;
+          this.speed = speed * 4; // the speed of the rocket is 4 times greater than that of the tank
+          this.damage = damage;
+          this.width = 10;
+          this.height = 20;
+          this.color = "red";
+          this.draw = function (ctx) {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+          };
+          this.onTouchMap = function (index) {
+            // code to handle the collision with the map object
+          };
+        }
+
+        // Creating an object instance Rocket
+        var myRocket = new Rocket(50, 50, 5, 50);
+      };
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas" width="600" height="300"></canvas>
+  </body>
+</html>
